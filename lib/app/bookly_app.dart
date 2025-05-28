@@ -1,8 +1,9 @@
-import 'package:bookly_app/core/constants/app_colors.dart';
+import 'package:bookly_app/core/utils/app_colors.dart';
 import 'package:bookly_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BooklyApp extends StatelessWidget {
   const BooklyApp({super.key});
@@ -22,6 +23,9 @@ class BooklyApp extends StatelessWidget {
           //TODO change the way you use themeing
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: AppColors.background,
+            textTheme: GoogleFonts.montserratTextTheme(
+              ThemeData.dark().textTheme,
+            ),
           ),
           home: SplashView(),
         );
