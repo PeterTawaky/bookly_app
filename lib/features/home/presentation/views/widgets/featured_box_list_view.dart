@@ -1,18 +1,18 @@
-import 'package:bookly_app/features/home/presentation/views/widgets/custom_list_view_item.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FeaturedBoxListView extends StatelessWidget {
-  const FeaturedBoxListView({super.key});
+  final double listHeight;
+  const FeaturedBoxListView({super.key, required this.listHeight});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 250.h,
+      height: listHeight,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 10,
-        itemBuilder: (context, index) => CustomListViewItem(aspectRatio:1.2 / 2),
+        itemBuilder: (context, index) => CustomBookImage(aspectRatio: 1.2 / 2),
       ),
     );
   }

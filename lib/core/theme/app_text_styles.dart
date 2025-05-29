@@ -1,4 +1,4 @@
-import 'package:bookly_app/core/utils/app_fonts.dart';
+import 'package:bookly_app/core/config/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

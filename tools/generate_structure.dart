@@ -28,7 +28,7 @@ Future<void> main() async {
       'app_sizes.dart',
       'app_fonts.dart',
       'hive_constants.dart',
-      'api_constatnts.dart',
+      'api_constants.dart',
     ],
 
     'lib/core/utils/theme': ['app_theme.dart'],

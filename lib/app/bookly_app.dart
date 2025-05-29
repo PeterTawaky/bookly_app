@@ -1,8 +1,8 @@
-import 'package:bookly_app/core/utils/app_colors.dart';
+import 'package:bookly_app/core/config/app_colors.dart';
+import 'package:bookly_app/core/router/router_generator.dart';
 import 'package:bookly_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BooklyApp extends StatelessWidget {
@@ -18,7 +18,8 @@ class BooklyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (_, child) {
-        return GetMaterialApp(
+        return MaterialApp.router(
+          routerConfig: RouterGenerator.mainRouting, //variable you have created
           debugShowCheckedModeBanner: false,
           //TODO change the way you use themeing
           theme: ThemeData.dark().copyWith(
@@ -27,7 +28,6 @@ class BooklyApp extends StatelessWidget {
               ThemeData.dark().textTheme,
             ),
           ),
-          home: SplashView(),
         );
       },
     );
