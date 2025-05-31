@@ -7,11 +7,14 @@ import 'package:equatable/equatable.dart';
 part 'newest_books_state.dart';
 
 class NewestBooksCubit extends Cubit<NewestBooksState> {
+  late bool isLoading;
+
   NewestBooksCubit(this.homeRepo) : super(NewestBooksInitial());
 
   HomeRepo homeRepo;
 
   Future<void> fetchNewstBooks() async {
+    isLoading = true;
     emit(NewestBooksLoading());
     var result = await homeRepo.fetchNewstBooks();
     result.fold(
@@ -20,6 +23,7 @@ class NewestBooksCubit extends Cubit<NewestBooksState> {
       },
       (books) {
         emit(NewestBooksSuccess(books: books));
+        isLoading = false;
       },
     );
   }

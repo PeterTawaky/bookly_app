@@ -1,8 +1,13 @@
+import 'package:bookly_app/core/api/dio_consumer.dart';
 import 'package:bookly_app/core/router/app_routes.dart';
+import 'package:bookly_app/features/home/data/repositories/home_repo_impl.dart';
+import 'package:bookly_app/features/home/presentation/manager/featured_books/featured_books_cubit.dart';
+import 'package:bookly_app/features/home/presentation/manager/newest_books/newest_books_cubit.dart';
 import 'package:bookly_app/features/home/presentation/views/book_details_view.dart';
 import 'package:bookly_app/features/home/presentation/views/home_view.dart';
 import 'package:bookly_app/features/search/presentation/views/search_view.dart';
 import 'package:bookly_app/features/splash/presentation/views/splash_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class RouterGenerator {
@@ -24,7 +29,27 @@ class RouterGenerator {
       GoRoute(
         name: AppRoutes.homeView,
         path: AppRoutes.homeView,
-        builder: (context, state) => HomeView(),
+        builder:
+            (context, state) => MultiBlocProvider(
+              providers: [
+                BlocProvider(
+                  create:
+                      (context) => FeaturedBooksCubit(
+                        HomeRepoImpl(DioConsumer()),
+                        // getIt<HomeRepoImpl>()
+                      )..fetchFeaturedBooks(),
+                ),
+                BlocProvider(
+                  create:
+                      (context) => NewestBooksCubit(
+                        HomeRepoImpl(DioConsumer()),
+
+                        // getIt<HomeRepoImpl>()
+                      )..fetchNewstBooks(),
+                ),
+              ],
+              child: HomeView(),
+            ),
       ),
       GoRoute(
         name: AppRoutes.bookDetailsView,
