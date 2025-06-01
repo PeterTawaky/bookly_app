@@ -2,9 +2,6 @@ import 'package:bookly_app/core/api/api_constants.dart';
 import 'package:bookly_app/core/api/api_consumer.dart';
 import 'package:bookly_app/core/api/api_interceptor.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio = Dio();
