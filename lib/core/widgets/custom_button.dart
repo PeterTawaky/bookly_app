@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomButton extends StatelessWidget {
+  final void Function()? onPressed;
   final Color backgroundColor;
   final Color textColor;
   final BorderRadius borderRadius;
@@ -13,6 +14,7 @@ class CustomButton extends StatelessWidget {
     required this.textColor,
     required this.borderRadius,
     required this.text,
+    this.onPressed,
   });
 
   @override
@@ -24,7 +26,7 @@ class CustomButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           shape: RoundedRectangleBorder(borderRadius: borderRadius),
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(
           text,
           style: AppTextStyles.textStyle18.copyWith(

@@ -1,17 +1,15 @@
-import 'package:bookly_app/core/config/app_fonts.dart';
-import 'package:bookly_app/core/theme/app_text_styles.dart';
+import 'package:bookly_app/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/book_details_custom_app_bar.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/book_rating.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/box_action.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/custom_book_image.dart';
-import 'package:bookly_app/features/home/presentation/views/widgets/featured_box_list_view.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/sections/book_details_section.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/sections/similar_box_section.dart';
+import 'package:bookly_app/features/home/presentation/views/widgets/similar_box_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
+  final BookModel bookModel;
+  const BookDetailsViewBody({super.key, required this.bookModel});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +23,11 @@ class BookDetailsViewBody extends StatelessWidget {
             child: Column(
               children: [
                 const BookDetailsCustomAppBar(),
-                const BookDetailsSection(),
-                const BoxAction(),
+                BookDetailsSection(bookModel: bookModel),
+                BoxAction(bookModel: bookModel),
 
                 const Expanded(child: SizedBox()),
-                SimilarBoxSection(),
+                SimilarBoxList(listHeight: 100.h),
               ],
             ),
           ),

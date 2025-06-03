@@ -29,6 +29,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   bloc: ^9.0.0
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.8.0+1
@@ -43,8 +44,9 @@ dependencies:
   go_router: ^15.1.2
   google_fonts: ^6.2.1
   pretty_dio_logger: ^1.4.0
+  shimmer: ^3.0.0
   skeletonizer: ^1.4.3
-  url_launcher: ^6.2.5
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -52,7 +54,7 @@ dev_dependencies:
     sdk: flutter
 flutter_assets:
   assets_path: assets/images/
-  output_path: lib/core/constants/
+  output_path: lib/core/config/
   filename: app_assets.dart
   field_prefix: null
 # For information on the generic Dart part of this file, see the

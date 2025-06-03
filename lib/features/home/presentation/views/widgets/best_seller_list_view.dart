@@ -1,8 +1,10 @@
 import 'package:bookly_app/core/widgets/custom_error_widget.dart';
+import 'package:bookly_app/core/widgets/loading_indicator_shimmer.dart';
 import 'package:bookly_app/features/home/presentation/manager/newest_books/newest_books_cubit.dart';
 import 'package:bookly_app/features/home/presentation/views/widgets/best_seller_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class BestSellerListView extends StatelessWidget {
@@ -16,15 +18,20 @@ class BestSellerListView extends StatelessWidget {
           return SliverToBoxAdapter(
             child: CustomErrorWidget(errorMessage: state.apiErrorModel.message),
           );
+        } else if (state is NewestBooksSuccess) {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: state.books.length,
+              (context, index) => BestSellerItem(book: state.books[index]),
+            ),
+          );
         } else {
-          return SliverToBoxAdapter(
-            child: Skeletonizer(
-              enabled: BlocProvider.of<NewestBooksCubit>(context).isLoading,
-              child: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  childCount: 10,
-                  (context, index) => const BestSellerItem(),
-                ),
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: 10,
+              (context, index) => Padding(
+                padding: EdgeInsets.all(12.h),
+                child: LoadingIndicatorShimmer(aspectRatio: 1.3 / 2),
               ),
             ),
           );

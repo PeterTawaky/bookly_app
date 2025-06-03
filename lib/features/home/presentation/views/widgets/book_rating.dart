@@ -4,13 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookRating extends StatelessWidget {
-  const BookRating({super.key});
+  final double rating;
+  final int count;
+  const BookRating({super.key, required this.rating, required this.count});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text('19.99€', style: AppTextStyles.textStyle20),
+        Text('Free', style: AppTextStyles.textStyle20),
         Spacer(),
         Icon(
           FontAwesomeIcons.solidStar,
@@ -18,10 +20,10 @@ class BookRating extends StatelessWidget {
           size: 20.sp,
         ),
         SizedBox(width: 5.w),
-        Text('4.6', style: AppTextStyles.textStyle18),
+        Text(rating.toString(), style: AppTextStyles.textStyle18),
         SizedBox(width: 5.w),
         Text(
-          '(2390)',
+          '($count)',
           style: AppTextStyles.textStyle16.copyWith(color: Colors.grey),
         ),
       ],

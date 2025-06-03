@@ -22,7 +22,7 @@ class NewestBooksCubit extends Cubit<NewestBooksState> {
         emit(NewestBooksFailure(apiErrorModel: failure));
       },
       (books) {
-        emit(NewestBooksSuccess(books: books));
+        emit(NewestBooksSuccess(books: books.cast<BookModel>()));
         isLoading = false;
       },
     );

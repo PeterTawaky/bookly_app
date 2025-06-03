@@ -10,12 +10,12 @@ class HomeRepoImpl extends HomeRepo {
   final DioConsumer dioConsumer;
   HomeRepoImpl(this.dioConsumer);
   @override
-  Future<Either<ApiErrorModel, List<BookModel>>> fetchNewstBooks() async {
+  Future<Either<ApiErrorModel, List<dynamic>>> fetchNewstBooks() async {
     try {
       var data = await dioConsumer.get(
         ApiConstants.googleBooks.endpoints.volumes,
         queryParameters: {
-          'q': 'subject:computers',
+          'q': 'robots',
           'Filtering': 'free-',
           'Sorting': 'newest',
         },
@@ -27,11 +27,26 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<ApiErrorModel, List<BookModel>>> fetchFeaturedBooks() async {
+  Future<Either<ApiErrorModel, List<dynamic>>> fetchFeaturedBooks() async {
     try {
       var data = await dioConsumer.get(
         ApiConstants.googleBooks.endpoints.volumes,
-        queryParameters: {'q': 'subject:computers', 'Filtering': 'free-'},
+        queryParameters: {'q': 'AI', 'Filtering': 'free-'},
+      );
+      return Right(data['items'].map((e) => BookModel.fromJson(e)).toList());
+    } on Exception catch (e) {
+      return Left(ApiErrorHandler.handle(e));
+    }
+  }
+
+  @override
+  Future<Either<ApiErrorModel, List<dynamic>>> fetchSimilarBooks({
+    required String category,
+  }) async {
+    try {
+      var data = await dioConsumer.get(
+        ApiConstants.googleBooks.endpoints.volumes,
+        queryParameters: {'q': category, 'Filtering': 'free-'},
       );
       return Right(data['items'].map((e) => BookModel.fromJson(e)).toList());
     } on Exception catch (e) {
